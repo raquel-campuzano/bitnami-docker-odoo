@@ -50,13 +50,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create odoo_network
   ```
 
 2. Start a PostgreSQL database in the network generated:
 
-  ```
+  ```bash
   $ docker run -d --name postgresql --net=odoo_network bitnami/postgresql
   ```
 
@@ -64,7 +64,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the Odoo container:
 
-  ```
+  ```bash
   $ docker run -d -p 80:8069 --name odoo --net=odoo_network bitnami/odoo
   ```
 
@@ -106,13 +106,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create odoo-tier
   ```
 
 2. Create a PostgreSQL container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name postgresql \
     --net odoo-tier \
     --volume /path/to/postgresql-persistence:/bitnami/postgresql \
@@ -123,7 +123,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the Odoo container with hist volumes:
 
-  ```
+  ```bash
   $ docker run -d --name odoo -p 80:8069 \
     --net odoo-tier \
     --volume /path/to/odoo-persistence:/bitnami/odoo \
@@ -136,7 +136,7 @@ Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security 
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/odoo:latest
   ```
 
@@ -177,7 +177,7 @@ application:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
+```bash
  $ docker run -d -e ODOO_PASSWORD=my_password -p 80:8069 --name odoo -v /your/local/path/bitnami/odoo:/bitnami/odoo --network=odoo_network bitnami/odoo
 ```
 
@@ -201,7 +201,7 @@ To configure Odoo to send email using SMTP you can set the following environment
 This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
-```
+```yaml
   application:
     image: bitnami/odoo:latest
     ports:
@@ -215,7 +215,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * For manual execution:
 
-```
+```bash
  $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:8069 --name odoo -v /your/local/path/bitnami/odoo:/bitnami/odoo --network=odoo_network bitnami/odoo
 ```
 
@@ -230,7 +230,7 @@ To backup your application data follow these steps:
 
 2. Copy the Odoo data folder in the host:
 
-  ```
+  ```bash
   $ docker cp /your/local/path/bitnami:/bitnami/odoo
   ```
 
